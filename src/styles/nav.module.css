@@ -1,0 +1,23 @@
+.cartListItem {
+  margin-left: auto;
+}
+
+.cartListItem a {
+  padding: 9px;
+}
+
+.cartListItem img {
+  height: 30px;
+}
+
+li.navItem {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: var(--invert-color)
+}
+
+li.navItem:hover,
+li.navItem:focus {
+  box-shadow: 0 0 3px white;
+  border-radius: 8px;
+}

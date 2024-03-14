@@ -1,0 +1,66 @@
+:root {
+  --page-container-padding: 1.25rem;
+  --primary-color: black;
+  --invert-color: white;
+  --navBar-color: #131921;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+nav {
+  background-color: var(--navBar-color);
+  /* padding-inline: var(--page-container-padding); */
+  padding: 4px var(--page-container-padding)
+}
+
+ul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+a {
+  padding: 1rem;
+  /* color: var(--invert-color) */
+  /* border: 1px solid red; */
+}
+
+/* li {
+  color: var(--invert-color)
+} */
+
+.home {}
+
+main {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+main h2 {
+  padding: 4px 24px;
+}
+
+video {
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  background-color: var(--navBar-color);
+  color: var(--invert-color);
+  padding: 1rem;
+}
+
+.card-container {
+  /* min-width: 100%; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  min-height: 300px;
+  gap: 1.5rem;
+  margin: 10px 20px;
+}
