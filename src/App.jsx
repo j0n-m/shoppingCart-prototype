@@ -4,9 +4,33 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const { loading, shopData } = useFetchShop();
-  // console.log('app.jsx', shopData, loading)
+  const [cart, setCart] = useState([]);
+  // [{imageSrc, title, price, quantity, id}]
+
+  const updateCart = ({ imageSrc, title, price, quantity, id }) => {
+    const cartItem = {
+      id,
+      title,
+      quantity,
+      price,
+      imageSrc,
+    }
+    const itemIndex = cart.findIndex((item) => item.id == id);
+    if (itemIndex === -1) {
+      let newCart = [...cart, cartItem]
+      setCart([...newCart]);
+      console.log("added new item to cart!", newCart)
+    } else {
+      const oldCart = [...cart];
+      quantity == 0 ? oldCart.splice(itemIndex, 1) : oldCart[itemIndex] = Object.assign({}, { ...cartItem });
+
+      setCart(oldCart);
+      console.log("updated cart with: ", oldCart)
+    }
+  }
   return (
-    <MainShop loading={loading} shopData={shopData} />
+    <MainShop loading={loading} shopData={shopData} updateCart={updateCart} cart={cart} />
+    // <Card imageSrc="" title="test" price={12}></Card>
   )
 }
 function useFetchShop() {
@@ -23,21 +47,6 @@ function useFetchShop() {
         const categories = await fetch(allCategoriesAPI, { mode: 'cors' });
         const categoriesArr = await categories.json();
         console.log('Categories in dataFetch(): ', categoriesArr);
-        // result.push(...categoriesArr);
-        // Promise.allSettled([fetch()])
-
-        // categoriesArr.forEach(async (cat) => {
-        //   const currentCategoryResponse = await fetch(`${allFromCategoriAPI}/${cat}`)
-        //   if (!currentCategoryResponse.ok) {
-        //     throw new Error(`Bad response - ${currentCategoryResponse.status}`)
-        //   }
-        //   const categoryValuesArr = await currentCategoryResponse.json();
-        //   console.log(categoryValuesArr)
-        //   result.push({
-        //     category: cat,
-        //     values: [...categoryValuesArr],
-        //   })
-        // })
         for (const cat of categoriesArr) {
           const response = await fetch(`${allFromCategoriAPI}/${cat}`);
           if (!response.ok) {

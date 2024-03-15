@@ -1,8 +1,7 @@
-import { useState } from "react"
 import PropTypes from 'prop-types';
 import Card from "./Card";
 
-export default function Shop({ loading, shopData }) {
+export default function Shop({ loading, shopData, updateCart, cart }) {
   // console.log('Shop.jsx', loading, shopData)
   let categories = [];
   let categorizedItems = {};
@@ -27,12 +26,13 @@ export default function Shop({ loading, shopData }) {
         {categories.map((category, index) => <><h2 key={index}>{formatString(category)}</h2>
           <div className="card-container">
             {categorizedItems[category].map((el) => <Card
+              updateCart={updateCart}
               key={el.id}
               id={el.id}
               imageSrc={el.image}
               title={el.title}
               price={el.price}
-              rating={el.rating.rate}
+              cart={cart}
             ></Card>)} </div>
         </>)}
       </>
@@ -55,15 +55,15 @@ export default function Shop({ loading, shopData }) {
 
   return (
     <>
-      <p>shopping</p>
-      {/* {console.log(shopData)} */}
       {loading ? <p>Loading...</p> : !shopData.length ? errorOccured() :
-        <div>done</div>}
-      {parseData()}
+        parseData()}
     </>
 
   )
 }
 Shop.propTypes = {
   shopData: PropTypes.array,
+  loading: PropTypes.bool,
+  updateCart: PropTypes.func,
+  cart: PropTypes.array,
 }

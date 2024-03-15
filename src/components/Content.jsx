@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import Home from './Home';
 import Shop from './Shop';
+import Cart from './Cart';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
-export default function Content({ loading, shopData }) {
+export default function Content({ loading, shopData, updateCart, cart }) {
   const { name } = useParams();
   // const { loading, shopData } = useFetchShop();
   const urlParam = name ? name.toLowerCase() : name;
@@ -13,12 +13,15 @@ export default function Content({ loading, shopData }) {
   //params is either undefined or shop or cart
   return (
     <main>
-      {urlParam == 'shop' ? <Shop loading={loading} shopData={shopData}></Shop> :
-        urlParam == 'cart' ? <p>cart</p> : <Home></Home>}
+      {urlParam == 'shop' ? <Shop loading={loading} shopData={shopData} updateCart={updateCart} cart={cart}></Shop> :
+        urlParam == 'cart' ? <Cart cart={cart}></Cart> : <Home></Home>}
     </main>
   );
 }
 
-// Content.propTypes = {
-//   data: PropTypes.object,
-// }
+Content.propTypes = {
+  shopData: PropTypes.array,
+  loading: PropTypes.bool,
+  updateCart: PropTypes.func,
+  cart: PropTypes.array,
+}
