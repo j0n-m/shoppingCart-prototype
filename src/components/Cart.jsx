@@ -7,21 +7,21 @@ export default function Cart({ cart }) {
       <div className={`${styles.cartContainer}`}>
         {cart.length ?
           cart.map((item) =>
-            <>
-              <div key={item.id} className={`${styles.cartCard}`}>
-                <div className={`${styles.imageContainer}`}>
-                  <img src={item.imageSrc} alt="item" />
-                </div>
-                <div className={`${styles.cardDetails}`}>
-                  <p className={`${styles.cardTitle}`}>{item.title}</p>
-                  <div className={`${styles.cardDetailsInnerBottom}`}>
-                    <p>Price <span className={styles.cardPrice}>${item.price}</span></p>
-                    <p>Quantity: <span className={styles.cardQuantity}>{item.quantity}</span></p>
-                  </div>
+
+            <div key={item.id} className={`${styles.cartCard}`}>
+              <div className={`${styles.imageContainer}`}>
+                <img src={item.imageSrc} alt="item" />
+              </div>
+              <div className={`${styles.cardDetails}`}>
+                <p className={`${styles.cardTitle}`}>{item.title}</p>
+                <div className={`${styles.cardDetailsInnerBottom}`}>
+                  <p>Price <span className={styles.cardPrice}>${item.price}</span></p>
+                  <p>Quantity: <span className={styles.cardQuantity}>{item.quantity}</span></p>
                 </div>
               </div>
+            </div>
 
-            </>
+
           ) : <p>Nothing here :(</p>}
       </div>
       {cart.length ?

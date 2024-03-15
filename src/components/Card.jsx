@@ -4,11 +4,14 @@ import PropTypes from 'prop-types';
 import InputQuantity from './InputQuantity';
 export default function Card({ id, imageSrc, title, price, updateCart, cart }) {
   const [cartQuantity, setCartQuantity] = useState(0);
+  const [test, setTest] = useState('initial');
+
   const changeQuantity = (num) => {
     setCartQuantity(num);
+    setTest('saved state');
     // [{imageSrc, title, price, quantity, id}]
     updateCart({ id, imageSrc, title, price, quantity: num });
-
+    console.log('cart quantity state', cartQuantity)
     //find index inside cart state array to look for item id, if so overwrite the quantity,
     //setCart with cartQuantity
     //otherwise, push the item object to the cart state array with a new quantity property set
@@ -30,6 +33,7 @@ export default function Card({ id, imageSrc, title, price, updateCart, cart }) {
   }
   return (
     <div className={`${styles.card}`}>
+      {test}
       <div className={`${styles.imageContainer}`}>
         <img src={imageSrc} alt="" />
       </div>
@@ -44,6 +48,7 @@ export default function Card({ id, imageSrc, title, price, updateCart, cart }) {
     </div>
   )
 }
+// <button className={`${styles.addToCartBtn}`} onClick={() => { validateItemsInCart(id) }}>Add to Cart</button>
 
 Card.propTypes = {
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
