@@ -21,6 +21,13 @@ export default function Card({ id, imageSrc, title, price, updateCart, cart }) {
     const index = cart.findIndex(item => item.id == id)
     return cart[index].quantity;
   }
+  const validateItemsInCart = (id) => {
+    let newNum = 1;
+    if (itemIsInCart(id)) {
+      newNum += getQuantityFromCart(id);
+    }
+    changeQuantity(newNum);
+  }
   return (
     <div className={`${styles.card}`}>
       <div className={`${styles.imageContainer}`}>
@@ -30,10 +37,9 @@ export default function Card({ id, imageSrc, title, price, updateCart, cart }) {
         <p className={`${styles.title}`}>{title}</p>
         <p className={`${styles.price}`}>${price}</p>
       </div>
-      {itemIsInCart() ? <InputQuantity value={getQuantityFromCart(id)} changeValue={changeQuantity}></InputQuantity> :
-        cartQuantity === 0 ?
-          <button className={`${styles.addToCartBtn}`} onClick={() => { changeQuantity(cartQuantity + 1) }}>Add to Cart</button> :
-          <InputQuantity value={cartQuantity} changeValue={changeQuantity}></InputQuantity>}
+      {cartQuantity === 0 ?
+        <button className={`${styles.addToCartBtn}`} onClick={() => { validateItemsInCart(id) }}>Add to Cart</button> :
+        <InputQuantity value={cartQuantity} changeValue={changeQuantity}></InputQuantity>}
 
     </div>
   )

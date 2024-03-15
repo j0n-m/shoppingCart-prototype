@@ -26,7 +26,8 @@ export default function Cart({ cart }) {
       </div>
       {cart.length ?
         <div className={`${styles.checkoutContainer}`}>
-          <span>Subtotal: ${cart.flatMap((item) => item.quantity * item.price).reduce((acc, num) => num + acc)}</span>
+          <span style={{ marginBottom: "4px" }}>Subtotal: <span style={{ fontWeight: "bold", fontSize: "1.0rem" }}>${cart.flatMap((item) => item.quantity * item.price).reduce((acc, num) => num + acc)}</span></span>
+          <p style={{ fontSize: ".85rem" }}>(Taxes not included)</p>
           <button onClick={() => { console.log('Open Payment Center') }}>Proceed to checkout</button>
         </div> : <span></span>
       }
